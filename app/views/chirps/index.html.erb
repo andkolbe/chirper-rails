@@ -3,9 +3,7 @@
 <ul>
   <% @chirps.each do |chirp| %>
     <li>
-        <%= chirp.content %>
-        <br>
-        <%= chirp.location %>
+        <%= link_to chirp.content, chirp %>
     </li>
   <% end %>
 </ul>

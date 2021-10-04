@@ -6,6 +6,22 @@ class ChirpsController < ApplicationController
   def show
     @chirp = Chirp.find(params[:id])
   end
+
+  # display the page to write a new chirp
+  def new
+    @chirp = Chirp.new
+  end
+
+  # POST request to write a new chirp
+  def create
+    @chirp = Chirp.new(chirp_params)
+
+    if @chirp.save
+      redirect_to chirp
+    else
+      render :new
+    end
+  end
 end
 
 
