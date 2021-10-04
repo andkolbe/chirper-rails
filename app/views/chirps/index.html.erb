@@ -1,1 +1,11 @@
 <h1>Hello, Rails</h1>
+
+<ul>
+  <% @chirps.each do |chirp| %>
+    <li>
+        <%= chirp.content %>
+        <br>
+        <%= chirp.location %>
+    </li>
+  <% end %>
+</ul>
