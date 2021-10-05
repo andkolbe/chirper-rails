@@ -1,5 +1,12 @@
 # Controllers are Ruby classes, and their public methods are actions
 class ChirpsController < ApplicationController
+
+  before_action :set_chirp, only: %i[ show edit update destroy ]
+  # if a user isn't authenticated, they can't see anything except the index and show pages
+  before_action :authenticate_user!, except: [:home, :show] 
+  # only check if this is the correct user for edit, update, and destroy
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
   def home
     @chirps = Chirp.all
   end
@@ -10,12 +17,15 @@ class ChirpsController < ApplicationController
 
   # display the page to write a new chirp
   def new
-    @chirp = Chirp.new
+    # @chirp = chirp.new
+    # we only want to display the chirps of the current user
+    @chirp = current_user.chirps.build
   end
 
   # POST request to write a new chirp
   def create
-    @chirp = Chirp.new(chirp_params)
+    # @chirp = chirp.new(chirp_params)
+    @chirp = current_user.chirps.build(chirp_params)
     respond_to do |format|
     if @chirp.save
       format.html { redirect_to @chirp, notice: "Chirp was successfully created." }
@@ -59,8 +69,17 @@ class ChirpsController < ApplicationController
     end 
   end
 
+  def correct_user
+    @chirp = current_user.chirps.find_by(id: params[:id])
+    redirect_to chirps_path, notice: 'Not Authorized to Edit This Chirp' if @chirp.nil?
+  end
 
   private 
+    # Use callbacks to share common setup or constraints between actions.
+    def set_chirp
+      @chirp = Chirp.find(params[:id])
+    end
+
     def chirp_params
       params.require(:chirp).permit(:content, :location, :user_id)
     end
