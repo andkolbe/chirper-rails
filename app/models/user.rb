@@ -5,4 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
          has_many :chirps
+
+  validates :email, uniqueness: true
+  validates :username, uniqueness: true
 end
