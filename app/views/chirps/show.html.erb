@@ -4,4 +4,8 @@
 
 <ul>
     <li><%= link_to 'Edit', edit_chirp_path(@chirp) %></li>
+    <li><%= link_to 'Destroy', chirp_path(@chirp),
+                    # Must specify delete
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %></li>
 </ul>
