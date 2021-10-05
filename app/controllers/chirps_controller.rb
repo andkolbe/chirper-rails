@@ -1,5 +1,5 @@
 class ChirpsController < ApplicationController
-  def index
+  def home
     @chirps = Chirp.all
   end
 

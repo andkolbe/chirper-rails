@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "chirps#index"
+  root "chirps#home"
   
   resources :chirps
 
