@@ -1,11 +1,20 @@
-<h1><%= @chirp.content %></h1>
-
-<p><%= @chirp.location %></p>
-
-<ul>
-    <li><%= link_to 'Edit', edit_chirp_path(@chirp) %></li>
-    <li><%= link_to 'Destroy', chirp_path(@chirp),
+<div class='card my-2 p-4 shadow'>
+    <div clas='card-body'>
+        <h5 class='card-title'><%= @chirp.content %></h5>
+        <h6 class='card-text'>Location: <%= @chirp.location %></h6>
+        <small class='card-text text-secondary'><%= @chirp.created_at.strftime("%B %e %Y") %></small>
+        <div class='mt-4 d-flex justify-content-between'>
+            <div>
+                <%= link_to 'Back', root_path, class:"btn btn-dark" %>
+                <%= link_to 'Edit', edit_chirp_path(@chirp), class:"btn btn-secondary" %>
+            </div>
+            <%= link_to 'Delete Chirp', chirp_path(@chirp),
                     # Must specify delete
                     method: :delete,
-                    data: { confirm: 'Are you sure?' } %></li>
-</ul>
+                    data: { confirm: 'Are you sure?' }, 
+                    class:"btn btn-danger" %>
+        </div>
+    </div>
+</div>
+
+
