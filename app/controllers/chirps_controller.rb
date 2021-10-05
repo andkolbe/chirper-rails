@@ -17,11 +17,17 @@ class ChirpsController < ApplicationController
     @chirp = Chirp.new(chirp_params)
 
     if @chirp.save
-      redirect_to chirp
+      redirect_to @chirp
     else
       render :new
     end
   end
+
+  private 
+    def chirp_params
+      params.require(:chirp).permit(:content, :location)
+    end
+
 end
 
 
