@@ -1,3 +1,4 @@
+# Controllers are Ruby classes, and their public methods are actions
 class ChirpsController < ApplicationController
   def home
     @chirps = Chirp.all
@@ -15,12 +16,16 @@ class ChirpsController < ApplicationController
   # POST request to write a new chirp
   def create
     @chirp = Chirp.new(chirp_params)
-
+    respond_to do |format|
     if @chirp.save
-      redirect_to @chirp
+      format.html { redirect_to @chirp, notice: "Chirp was successfully created." }
+      format.json { render :show, status: :created, location: @chirp }
     else
-      render :new
+      format.html { render :new, status: :unprocessable_entity }
+      format.json { render json: @chirp.errors, status: :unprocessable_entity }
     end
+  end
+
   end
 
   # display the page to edit an existing chirp
@@ -33,11 +38,14 @@ class ChirpsController < ApplicationController
   # Refetch the article from the database and attempts to update it with the submitted form data filtered by chirp_params
   def update
     @chirp = Chirp.find(params[:id])
-
-    if @chirp.update(chirp_params)
-      redirect_to @chirp
-    else
-      render :edit
+    respond_to do |format|
+      if @chirp.update(chirp_params)
+        format.html { redirect_to @chirp, notice: "Chirp was successfully updated." }
+        format.json { render :show, status: :ok, location: @chirp }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @chirp.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -45,9 +53,12 @@ class ChirpsController < ApplicationController
   def destroy
     @chirp = Chirp.find(params[:id])
     @chirp.destroy
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Chirp was successfully deleted." }
+      format.json { head :no_content }
+    end 
+  end
 
-    redirect_to root_path
-  end 
 
   private 
     def chirp_params

@@ -20,7 +20,12 @@
     <%= render 'components/navbar' %>
     <div class="container">
       <div class="row justify-content-center mt-4">
-        <div class="col-md-6">                
+        <div class="col-md-6">   
+        <br/>
+          <% if notice %>
+            <%= render 'layouts/alerts'%>
+          <% end %> 
+                   
           <%= yield %>
         </div>
       </div>
