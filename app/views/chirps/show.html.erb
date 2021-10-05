@@ -1,3 +1,7 @@
 <h1><%= @chirp.content %></h1>
 
 <p><%= @chirp.location %></p>
+
+<ul>
+    <li><%= link_to 'Edit', edit_chirp_path(@chirp) %></li>
+</ul>
