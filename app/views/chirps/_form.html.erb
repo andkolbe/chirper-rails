@@ -1,8 +1,9 @@
 <%= form_with model: chirp, :html => {:class => 'border p-4 shadow form-group bg-white'} do |form| %>
+
     <div class="form-group">
         <%= form.label :content, class: "fw-bold mb-1" %>
         <br>
-        <%= form.text_area :content, class: "form-control bg-light" %>
+        <%= form.text_area :content, class: "form-control bg-light", placeholder: "What's on your mind?" %>
         <% chirp.errors.full_messages_for(:content).each do |message| %>
             <div><%= message %></div>
         <% end %>
@@ -11,16 +12,16 @@
     <div>
         <%= form.label :location, class: "mt-4 fw-bold mb-1" %>
         <br>
-        <%= form.text_field :location, class: "form-control bg-light" %>
+        <%= form.text_field :location, class: "form-control bg-light", placeholder: 'City, State' %>
         <br>
         <% chirp.errors.full_messages_for(:location).each do |message| %>
             <div><%= message %></div>
         <% end %>
     </div>
 
-    <div>
-        <%= form.submit 'Submit', class: "btn btn-success font-weight-bold text-white mt-2" %>
-    </div>
-
+    <%= form.number_field :user_id, id: :chirp_user_id, class: "form-control bg-light", value: current_user.id, type: :hidden %>
+    
+    <%= form.submit 'Submit', class: "btn btn-success font-weight-bold text-white mt-2" %>
+    
 <% end %>
 
