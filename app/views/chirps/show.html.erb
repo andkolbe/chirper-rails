@@ -1,5 +1,6 @@
 <div class='card my-2 p-4 shadow'>
     <div clas='card-body'>
+        <h6 class='card-title'>@<%= @chirp.user.name %></h6>
         <h5 class='card-title'><%= @chirp.content %></h5>
         <h6 class='card-text'>Location: <%= @chirp.location %></h6>
         <small class='card-text text-secondary'><%= @chirp.created_at.strftime("%B %e %Y") %></small>

@@ -7,5 +7,5 @@ class User < ApplicationRecord
          has_many :chirps
 
   validates :email, uniqueness: true
-  validates :username, uniqueness: true
+  validates :name, uniqueness: true
 end

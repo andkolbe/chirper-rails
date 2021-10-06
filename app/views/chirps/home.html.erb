@@ -4,6 +4,7 @@
   <% @chirps.each do |chirp| %>
     <div class='card my-2 p-4 shadow'>
       <div clas='card-body'>
+        <h6 class='card-title'>@<%= chirp.user.name %></h6>
         <h4 class='card-title'><%= chirp.content %></h4>
         <h6 class='card-text'>Location: <%= chirp.location %></h6>
         <div class='d-flex justify-content-between'>
@@ -13,4 +14,5 @@
       </div>
     </div>
   <% end %>
+
 
