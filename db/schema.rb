@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_05_232216) do
+ActiveRecord::Schema.define(version: 2021_10_06_040914) do
 
   create_table "chirps", force: :cascade do |t|
     t.string "content"
@@ -20,6 +20,17 @@ ActiveRecord::Schema.define(version: 2021_10_05_232216) do
     t.integer "user_id"
     t.integer "user_name"
     t.index ["user_id"], name: "index_chirps_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "commenter"
+    t.text "body"
+    t.integer "chirp_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "chirps_id", null: false
+    t.index ["chirp_id"], name: "index_comments_on_chirp_id"
+    t.index ["chirps_id"], name: "index_comments_on_chirps_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,4 +47,6 @@ ActiveRecord::Schema.define(version: 2021_10_05_232216) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "chirps"
+  add_foreign_key "comments", "chirps", column: "chirps_id"
 end

@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations'  }
   root "chirps#home"
   
-  resources :chirps
-
+  resources :chirps do
+    # creates comments as a nested resource within articles
+    resources :comments
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

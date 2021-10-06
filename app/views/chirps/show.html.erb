@@ -21,3 +21,20 @@
 </div>
 
 
+<h6>Add a comment:</h6>
+<%= form_with model: [ @chirp, @chirp.comments.build ], class: 'border p-3 shadow form-group bg-white' do |form| %>
+  <p>
+    <%= form.label :commenter, class: "fw-bold mb-1" %><br>
+    <%= form.text_field :commenter, class: "form-control bg-light" %>
+  </p>
+  <p>
+    <%= form.label :body, class: "mt-2 fw-bold mb-1" %><br>
+    <%= form.text_area :body, class: "form-control bg-light" %>
+  </p>
+  <p>
+    <%= form.submit 'Create Comment', class: "btn btn-success font-weight-bold text-white mt-2" %>
+  </p>
+<% end %>
+
+
+
