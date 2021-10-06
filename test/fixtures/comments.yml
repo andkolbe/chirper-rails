@@ -3,9 +3,9 @@
 one:
   commenter: MyString
   body: MyText
-  chirp: one
+  article: one
 
 two:
   commenter: MyString
   body: MyText
-  chirp: two
+  article: two

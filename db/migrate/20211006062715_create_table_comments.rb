@@ -1,9 +1,9 @@
-class CreateComments < ActiveRecord::Migration[6.1]
+class CreateTableComments < ActiveRecord::Migration[6.1]
   def change
     create_table :comments do |t|
       t.string :commenter
       t.text :body
-      t.references :chirps, null: false, foreign_key: true
+      t.references :chirp, null: false, foreign_key: true
 
       t.timestamps
     end
